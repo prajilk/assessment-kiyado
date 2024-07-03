@@ -2,6 +2,10 @@
 
 This project is a Simple E-commerce application built using the React.
 
+
+https://github.com/prajilk/assessment-kiyado/assets/76465233/36b4d9b1-983c-49f4-8f2e-8c2a206df521
+
+
 ## Table of Contents
 
 -   [Installation](#installation)
