@@ -35,7 +35,11 @@ const ProductCard = ({ product }) => {
                 className="w-full h-60 object-cover"
             />
             <div className="p-4 flex-1 flex flex-col">
-                <h3 className="text-lg font-semibold mb-2">{product.title}</h3>
+                <Link to={`/store/${product.id}`}>
+                    <h3 className="text-lg font-semibold mb-2">
+                        {product.title}
+                    </h3>
+                </Link>
                 <p className="text-sm text-muted-foreground mb-4">
                     {product.description.slice(0, 20)}...
                 </p>
