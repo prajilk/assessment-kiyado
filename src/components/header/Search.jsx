@@ -7,24 +7,26 @@ import { useNavigate } from "react-router";
 
 const Search = () => {
     const navigate = useNavigate();
-    const [searchKeyword, setSearchKeyword] = useState("");
-    const [showDropdown, setShowDropdown] = useState(false);
+
+    const [searchKeyword, setSearchKeyword] = useState(""); // State to store the search keyword
+    const [showDropdown, setShowDropdown] = useState(false); // State to control the dropdown visibility
+
+    // Debounce the search keyword to prevent excessive API calls
     const debouncedSearchKeyword = useDebounce(searchKeyword);
 
-    const { data, isLoading } = useSearch(debouncedSearchKeyword);
+    const { data, isLoading } = useSearch(debouncedSearchKeyword); // Use the useSearch hook to fetch search results
 
     function handleClickLink(id) {
-        console.log(id);
         navigate(`/store/${id}`);
         setShowDropdown(false);
     }
 
     return (
         <div
-            className="relative max-w-sm w-full space-y-1"
             tabIndex={0}
-            onFocus={() => setShowDropdown(true)}
-            onBlur={() => setShowDropdown(false)}
+            onFocus={() => setShowDropdown(true)} // Show the dropdown when focused
+            onBlur={() => setShowDropdown(false)} // Hide the dropdown when blurred
+            className="relative max-w-sm w-full space-y-1"
         >
             <Input
                 type="text"
@@ -32,7 +34,7 @@ const Search = () => {
                 value={searchKeyword}
                 onChange={(e) => {
                     setSearchKeyword(e.target.value);
-                    !showDropdown && setShowDropdown(true);
+                    !showDropdown && setShowDropdown(true); // Show the dropdown when the input value changes
                 }}
                 className="bg-muted"
             />
@@ -41,9 +43,11 @@ const Search = () => {
                     !showDropdown && "hidden"
                 }`}
             >
+                {/* Display a message when no search keyword is entered */}
                 {!searchKeyword ? (
                     <div>Search Products...</div>
                 ) : isLoading ? (
+                    // Display a loading message while searching
                     <>Loading...</>
                 ) : data && data.length !== 0 ? (
                     data.map((item, i) => (
@@ -70,6 +74,7 @@ const Search = () => {
                         </div>
                     ))
                 ) : (
+                    // Display a message when no search results are found
                     data && (
                         <div className="flex flex-col items-center justify-center gap-2 py-10">
                             <Frown

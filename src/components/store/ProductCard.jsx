@@ -1,10 +1,11 @@
-import { addToCart } from "@/slice/cart";
 import { Button } from "../ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
+import { addToCart } from "@/redux/cartSlice";
 
 const ProductCard = ({ product }) => {
+    // Get the cart array from the Redux store
     const cartArray = useSelector((state) => state.cartReducer);
     const dispatch = useDispatch();
 

@@ -2,7 +2,7 @@ import { useAllProducts } from "@/api/getAllProducts";
 import ProductCard from "../store/ProductCard";
 
 const Featured = () => {
-    const { data: products, isPending } = useAllProducts(3);
+    const { data: products } = useAllProducts(3);
 
     return (
         <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">

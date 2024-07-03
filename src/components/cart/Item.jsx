@@ -1,11 +1,13 @@
 import React from "react";
 import { Button } from "../ui/button";
 import { Trash2 } from "lucide-react";
-import { removeFromCart } from "@/slice/cart";
 import { useDispatch } from "react-redux";
+import { removeFromCart } from "@/redux/cartSlice";
 
 const Item = ({ cartItem }) => {
     const dispatch = useDispatch();
+
+    // Function to handle removing the product from the cart
     function handleRemoveItem(id) {
         dispatch(removeFromCart(id));
     }

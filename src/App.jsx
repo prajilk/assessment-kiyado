@@ -1,14 +1,16 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Suspense } from "react";
+import { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Toaster } from "sonner";
 import queryConfig from "./config/react-query";
+
 import PageLoading from "./components/common/PageLoading";
 import Error404 from "./components/common/Error404";
-import Home from "./pages/Home";
 import Footer from "./components/footer/Footer";
-import Store from "./pages/Store";
-import Cart from "./pages/Cart";
+
+const Home = lazy(() => import("./pages/Home"));
+const Cart = lazy(() => import("./pages/Cart"));
+const StoreRoute = lazy(() => import("./routes/Store"));
 
 const queryClient = new QueryClient({
     defaultOptions: queryConfig,
@@ -22,7 +24,7 @@ function App() {
                     <Routes>
                         <Route path="*" element={<Error404 />} />
                         <Route path="/" element={<Home />} />
-                        <Route path="/store" element={<Store />} />
+                        <Route path="store/*" element={<StoreRoute />} />
                         <Route path="/cart" element={<Cart />} />
                     </Routes>
                 </QueryClientProvider>

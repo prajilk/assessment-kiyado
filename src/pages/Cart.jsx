@@ -3,21 +3,26 @@ import Item from "@/components/cart/Item";
 import { Show } from "@/components/common/Show";
 import Header from "@/components/header/Header";
 import { Button } from "@/components/ui/button";
-import { emptyCart } from "@/slice/cart";
+import { emptyCart } from "@/redux/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
 export default function Cart() {
+    // Get the cart array from the Redux store
     const cartArray = useSelector((state) => state.cartReducer);
-    const dispatch = useDispatch();
-    const totalPrice = Math.ceil(
-        cartArray?.reduce((acc, curr) => acc + curr.price, 0)
-    );
 
+    const dispatch = useDispatch();
+
+    // Calculate the total price of the items in the cart
+    const totalPrice = cartArray
+        ?.reduce((acc, curr) => acc + curr.price, 0)
+        .toFixed(2);
+
+    // Function to handle the checkout process
     function handleCheckout() {
         toast.success("Order placed successfully!");
-        dispatch(emptyCart());
+        dispatch(emptyCart()); // Clear the cart by dispatching the emptyCart action
     }
 
     return (
@@ -68,6 +73,7 @@ export default function Cart() {
                     </div>
                 </Show.When>
                 <Show.Else>
+                    {/* Show empty cart component if there's not items in cart */}
                     <Header />
                     <EmptyCart />
                 </Show.Else>

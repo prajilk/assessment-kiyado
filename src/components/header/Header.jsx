@@ -5,11 +5,12 @@ import Search from "./Search";
 import { useSelector } from "react-redux";
 
 export default function Header() {
+    // Get the cart array from the Redux store
     const cart = useSelector((state) => state.cartReducer);
     return (
         <header className="px-4 lg:px-6 py-5 space-y-5 border-b shadow">
             <div className="flex items-center justify-between">
-                <Link to="#" className="flex items-center justify-center">
+                <Link to="/" className="flex items-center justify-center">
                     <ShoppingBagIcon className="h-6 w-6" />
                     <span className="sr-only">Simple Ecommerce</span>
                 </Link>
